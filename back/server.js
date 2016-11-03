@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Serving up bundle.js file
 app.use(express.static(`${rootPath}/front/bundle`));
 
+
 //API
 //Get all blog posts
 app.get('/posts', (req, res) => {
@@ -28,12 +29,16 @@ app.get('/posts', (req, res) => {
 });
 
 //Make a new post
-app.post('/posts', (req, res) => {
-  // const newPost = req.body;
-  console.log('DATA COMING FROM AJAX:', req.body);
-  // Post.create(newPost, (err, data) => {
-  //   console.log('New post created!:', data);
-  // })
+app.post('/my-posts', (req, res) => {
+  console.log('DATA FROM AJAX:', req.body);
+  console.log('POST req: ready to make a new post');
+  Post.create(req.body, () => {
+    console.log('Created new post!');
+  });
+});
+
+app.get('/my-posts', (req, res) => {
+  console.log('GET request: ready to make a new post');
 });
 
 app.get('/create-new-post', (req, res) => {
@@ -71,11 +76,11 @@ app.get('/posts/:id', (req, res) => {
   })
 });
 
-
 //Server call
 app.get('/*', (req, res) => {
   res.sendFile(`${rootPath}/front/index.html`);
 });
+
 
 
 db.on('open', () => {

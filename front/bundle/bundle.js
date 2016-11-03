@@ -36848,14 +36848,12 @@
 	  },
 	  submitNewPost: function submitNewPost() {
 	    _jquery2.default.ajax({
-	      url: '/create-new-post',
+	      url: '/my-posts',
 	      type: 'POST',
 	      data: {
 	        title: this.state.title,
 	        text: this.state.body
 	      }
-	    }).done(function (data) {
-	      console.log(data);
 	    });
 	  },
 	  render: function render() {

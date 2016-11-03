@@ -14,15 +14,12 @@ const CreatePost = React.createClass({
   },
   submitNewPost() {
     $.ajax({
-      url: '/create-new-post',
+      url: '/my-posts',
       type: 'POST',
       data: {
         title: this.state.title,
         text: this.state.body
       }
-    })
-    .done((data) => {
-      console.log(data);
     })
   },
   render(){
