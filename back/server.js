@@ -14,11 +14,10 @@ mongoose.connect('mongodb://localhost/blog-app');
 
 const db = mongoose.connection;
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Serving up bundle.js file
 app.use(express.static(`${rootPath}/front/bundle`));
-
 
 //API
 //Get all blog posts
@@ -35,6 +34,20 @@ app.post('/posts', (req, res) => {
   // Post.create(newPost, (err, data) => {
   //   console.log('New post created!:', data);
   // })
+});
+
+app.get('/create-new-post', (req, res) => {
+  // const newPost = req.body;
+  console.log(req);
+});
+
+app.post('/create-new-post', (req, res) => {
+  const newPost = req.body;
+  console.log('Ready to create new post', req.body);
+  Post.create(req.body, (err, data) => {
+    if(err) console.log("err");
+    else console.log('Created new post!');
+  });
 });
 
 app.get('/comments', (req, res) => {

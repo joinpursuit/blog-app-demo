@@ -10,22 +10,19 @@ const CreatePost = React.createClass({
     }
   },
   handleChange(inputField, e) {
-    console.log(e);
     this.setState({[inputField]: e.target.value})
-    console.log(this.state);
   },
   submitNewPost() {
     $.ajax({
-      url: '/posts',
+      url: '/create-new-post',
       type: 'POST',
       data: {
-        title: 'This is a test post that is being sent from AJAX',
-        text: 'Test post from AJAX'
+        title: this.state.title,
+        text: this.state.body
       }
     })
     .done((data) => {
-      console.log('AJAX data');
-      console.log('AJAX state', this.state);
+      console.log(data);
     })
   },
   render(){

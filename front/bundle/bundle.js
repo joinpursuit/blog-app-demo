@@ -36844,23 +36844,18 @@
 	    };
 	  },
 	  handleChange: function handleChange(inputField, e) {
-	    console.log(e);
 	    this.setState(_defineProperty({}, inputField, e.target.value));
-	    console.log(this.state);
 	  },
 	  submitNewPost: function submitNewPost() {
-	    var _this = this;
-	
 	    _jquery2.default.ajax({
-	      url: '/posts',
+	      url: '/create-new-post',
 	      type: 'POST',
 	      data: {
-	        title: 'This is a test post that is being sent from AJAX',
-	        text: 'Test post from AJAX'
+	        title: this.state.title,
+	        text: this.state.body
 	      }
 	    }).done(function (data) {
-	      console.log('AJAX data');
-	      console.log('AJAX state', _this.state);
+	      console.log(data);
 	    });
 	  },
 	  render: function render() {
