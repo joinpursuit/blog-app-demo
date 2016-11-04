@@ -6,7 +6,8 @@ const CreatePost = React.createClass({
   getInitialState() {
     return {
       title: '',
-      body: ''
+      body: '',
+      video: ''
     }
   },
   handleChange(inputField, e) {
@@ -18,7 +19,8 @@ const CreatePost = React.createClass({
       type: 'POST',
       data: {
         title: this.state.title,
-        text: this.state.body
+        text: this.state.body,
+        video: this.state.video
       }
     })
   },
@@ -32,6 +34,10 @@ const CreatePost = React.createClass({
         <br/>
         <label>Body: </label>
         <input onChange={this.handleChange.bind(this, 'body')} type="body" name="body" />
+        <br/>
+        <br/>
+        <label>YouTube Video ID: </label>
+        <input onChange={this.handleChange.bind(this, 'video')} type="body" name="body" />
         <br/>
         <br/>
         <Link to="/"><input onClick={this.submitNewPost} type="button" value="Submit" /></Link>

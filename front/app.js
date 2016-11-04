@@ -8,27 +8,21 @@ import $ from 'jquery';
 import Posts from './posts/Posts.jsx';
 import PostPage from './post-page/PostPage.jsx';
 import CreatePost from './create-post/CreatePost.jsx';
-import Comment from './comments/Comment.jsx';
+import Navbar from './navbar/Navbar.jsx';
 import NoRoute from './NoRoute';
 
+//Redux
+import store from './store/store.js';
+import {getPostsAsync} from './actions/actions.js';
+
 const App = React.createClass({
-  getInitialState() {
-    return {posts: []}
-  },
   componentDidMount() {
-    $.ajax({
-      url: '/posts',
-      type: 'GET'
-    })
-    .done((data) => {
-      this.setState({posts: data});
-    })
+    store.dispatch(getPostsAsync())
   },
   render: function() {
     return (
       <div style={appStyles}>
-        <Posts posts={this.state.posts}/>
-        <Comment />
+        <Posts posts={store.getState().posts}/>
         {this.props.children}
       </div>
     );
@@ -40,7 +34,18 @@ const appStyles = {
   backgroundColor: 'azure'
 }
 
-ReactDOM.render(
+// ReactDOM.render(
+//   <Router history={browserHistory}>
+//     <Route path="/" component={App} />
+//     <Route path="create-post" component={CreatePost} />
+//     <Route path="/post/:id" component={PostPage} />
+//     <Route path="*" component={NoRoute} />
+//   </Router>,
+//   document.getElementById('root')
+// )
+
+
+const render = () => ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App} />
     <Route path="create-post" component={CreatePost} />
@@ -48,6 +53,10 @@ ReactDOM.render(
     <Route path="*" component={NoRoute} />
   </Router>,
   document.getElementById('root')
-)
+);
+
+render();
+store.subscribe(render);
+
 
 export default App;

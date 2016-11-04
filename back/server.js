@@ -28,10 +28,15 @@ app.get('/posts', (req, res) => {
   })
 });
 
+app.delete('/posts/:id', (req, res) => {
+  Post.remove({_id: req.params.id}, (err, data) => {
+    res.send(req.params.id);
+    console.log('Deleted post', req.params.id);
+  })
+});
+
 //Make a new post
 app.post('/my-posts', (req, res) => {
-  console.log('DATA FROM AJAX:', req.body);
-  console.log('POST req: ready to make a new post');
   Post.create(req.body, () => {
     console.log('Created new post!');
   });
@@ -41,19 +46,6 @@ app.get('/my-posts', (req, res) => {
   console.log('GET request: ready to make a new post');
 });
 
-app.get('/create-new-post', (req, res) => {
-  // const newPost = req.body;
-  console.log(req);
-});
-
-app.post('/create-new-post', (req, res) => {
-  const newPost = req.body;
-  console.log('Ready to create new post', req.body);
-  Post.create(req.body, (err, data) => {
-    if(err) console.log("err");
-    else console.log('Created new post!');
-  });
-});
 
 app.get('/comments', (req, res) => {
   console.log('Getting comments!');
