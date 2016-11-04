@@ -19,11 +19,7 @@ const PostPage = React.createClass({
 });
 
 const postsStyle = {
-    backgroundColor: 'azure',
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'column',
-    height: '100%'
+    backgroundColor: 'azure'
 }
 
 export default PostPage;

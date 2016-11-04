@@ -87,6 +87,10 @@
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
+	var _Home = __webpack_require__(278);
+	
+	var _Home2 = _interopRequireDefault(_Home);
+	
 	var _NoRoute = __webpack_require__(234);
 	
 	var _NoRoute2 = _interopRequireDefault(_NoRoute);
@@ -100,6 +104,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	//Redux
+	
+	
+	//Components
+	//npm modules
 	var App = _react2.default.createClass({
 	  displayName: 'App',
 	  componentDidMount: function componentDidMount() {
@@ -110,19 +118,18 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { style: appStyles },
-	      _react2.default.createElement(_Posts2.default, { posts: _store2.default.getState().posts }),
+	      _react2.default.createElement(_Navbar2.default, { links: [{ title: 'Posts', url: '/' }, { title: 'CreatePost', url: 'create-post' }] }),
 	      this.props.children
 	    );
 	  }
 	
 	});
 	
-	//Components
-	//npm modules
-	
-	
 	var appStyles = {
-	  backgroundColor: 'azure'
+	  backgroundColor: 'azure',
+	  display: 'flex',
+	  alignItems: 'center',
+	  flexDirection: 'column'
 	};
 	
 	// ReactDOM.render(
@@ -140,9 +147,13 @@
 	  return _reactDom2.default.render(_react2.default.createElement(
 	    _reactRouter.Router,
 	    { history: _reactRouter.browserHistory },
-	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: App }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'create-post', component: _CreatePost2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/post/:id', component: _PostPage2.default }),
+	    _react2.default.createElement(
+	      _reactRouter.Route,
+	      { path: '/', component: App },
+	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: 'create-post', component: _CreatePost2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/post/:id', component: _PostPage2.default })
+	    ),
 	    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _NoRoute2.default })
 	  ), document.getElementById('root'));
 	};
@@ -36753,11 +36764,7 @@
 	});
 	
 	var postsStyle = {
-	  backgroundColor: 'azure',
-	  display: 'flex',
-	  alignItems: 'center',
-	  flexDirection: 'column',
-	  height: '100%'
+	  backgroundColor: 'azure'
 	};
 	
 	exports.default = PostPage;
@@ -36881,46 +36888,54 @@
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
-	      'form',
-	      null,
+	      'div',
+	      { style: styles },
 	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        'Submit a post:'
-	      ),
-	      _react2.default.createElement(
-	        'label',
-	        null,
-	        'Title: '
-	      ),
-	      _react2.default.createElement('input', { onChange: this.handleChange.bind(this, 'title'), type: 'text', name: 'title' }),
-	      _react2.default.createElement('br', null),
-	      _react2.default.createElement('br', null),
-	      _react2.default.createElement(
-	        'label',
-	        null,
-	        'Body: '
-	      ),
-	      _react2.default.createElement('input', { onChange: this.handleChange.bind(this, 'text'), type: 'body', name: 'body' }),
-	      _react2.default.createElement('br', null),
-	      _react2.default.createElement('br', null),
-	      _react2.default.createElement(
-	        'label',
-	        null,
-	        'YouTube Video ID: '
-	      ),
-	      _react2.default.createElement('input', { onChange: this.handleChange.bind(this, 'video'), type: 'body', name: 'body' }),
-	      _react2.default.createElement('br', null),
-	      _react2.default.createElement('br', null),
-	      _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: '/' },
-	        _react2.default.createElement('input', { onClick: this.submitNewPost, type: 'button', value: 'Submit' })
+	        'form',
+	        { style: styles },
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Submit a post:'
+	        ),
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Title: '
+	        ),
+	        _react2.default.createElement('input', { onChange: this.handleChange.bind(this, 'title'), type: 'text', name: 'title' }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'Body: '
+	        ),
+	        _react2.default.createElement('input', { onChange: this.handleChange.bind(this, 'text'), type: 'body', name: 'body' }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'label',
+	          null,
+	          'YouTube Video ID: '
+	        ),
+	        _react2.default.createElement('input', { onChange: this.handleChange.bind(this, 'video'), type: 'body', name: 'body' }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/' },
+	          _react2.default.createElement('input', { onClick: this.submitNewPost, type: 'button', value: 'Submit' })
+	        )
 	      )
 	    );
 	  }
 	});
 	
+	var styles = {
+	  flex: 1,
+	  height: '100%'
+	};
 	exports.default = CreatePost;
 
 /***/ },
@@ -36996,7 +37011,7 @@
 	    'ul',
 	    null,
 	    props.links.map(function (link) {
-	      _react2.default.createElement(
+	      return _react2.default.createElement(
 	        'li',
 	        null,
 	        _react2.default.createElement(
@@ -38231,8 +38246,12 @@
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
 	var reducer = function reducer() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { posts: [], post: null };
+	  var _ref;
+	
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { posts: [], post: null, links: [(_ref = { title: 'Posts', url: '/' }, _defineProperty(_ref, 'title', 'Create Post'), _defineProperty(_ref, 'url', 'create-post'), _ref)] };
 	  var action = arguments[1];
 	
 	  switch (action.type) {
@@ -55278,6 +55297,40 @@
 	}.call(this));
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(266)(module)))
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _store = __webpack_require__(251);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _Posts = __webpack_require__(229);
+	
+	var _Posts2 = _interopRequireDefault(_Posts);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var HomePage = function HomePage(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_Posts2.default, { posts: _store2.default.getState().posts })
+	  );
+	};
+	
+	exports.default = HomePage;
 
 /***/ }
 /******/ ]);

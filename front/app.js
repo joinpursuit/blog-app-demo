@@ -1,7 +1,7 @@
 //npm modules
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, browserHistory} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import $ from 'jquery';
 
 //Components
@@ -9,6 +9,7 @@ import Posts from './posts/Posts.jsx';
 import PostPage from './post-page/PostPage.jsx';
 import CreatePost from './create-post/CreatePost.jsx';
 import Navbar from './navbar/Navbar.jsx';
+import HomePage from './home-page/Home.jsx';
 import NoRoute from './NoRoute';
 
 //Redux
@@ -22,7 +23,7 @@ const App = React.createClass({
   render: function() {
     return (
       <div style={appStyles}>
-        <Posts posts={store.getState().posts}/>
+        <Navbar links={[{title: 'Posts', url: '/'}, {title: 'CreatePost', url: 'create-post'}]}/>
         {this.props.children}
       </div>
     );
@@ -31,7 +32,10 @@ const App = React.createClass({
 });
 
 const appStyles = {
-  backgroundColor: 'azure'
+  backgroundColor: 'azure',
+  display: 'flex',
+  alignItems: 'center',
+  flexDirection: 'column'
 }
 
 // ReactDOM.render(
@@ -47,9 +51,11 @@ const appStyles = {
 
 const render = () => ReactDOM.render(
   <Router history={browserHistory}>
-    <Route path="/" component={App} />
-    <Route path="create-post" component={CreatePost} />
-    <Route path="/post/:id" component={PostPage} />
+    <Route path="/" component={App}>
+      <IndexRoute component={HomePage}/>
+      <Route path="create-post" component={CreatePost} />
+      <Route path="/post/:id" component={PostPage} />
+    </Route>
     <Route path="*" component={NoRoute} />
   </Router>,
   document.getElementById('root')

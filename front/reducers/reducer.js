@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const reducer = (state = {posts: [], post: null}, action) => {
+const reducer = (state = {posts: [], post: null, links: [{title: 'Posts', url: '/', title: 'Create Post', url: 'create-post'}]}, action) => {
   switch (action.type) {
     case 'GET_POSTS':
       return Object.assign({}, state, {posts: action.payload});
