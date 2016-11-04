@@ -1,26 +1,18 @@
 import React from 'react';
 import $ from 'jquery';
 import Post from '../post/Post.jsx'
+import {getSinglePostAsync} from '../actions/actions.js';
+import store from '../store/store.js';
 
 const PostPage = React.createClass({
-  getInitialState() {
-    return {post: null}
-  },
   componentDidMount() {
-    $.ajax({
-      url: `/posts/${this.props.params.id}`,
-      type: 'GET'
-    })
-    .done((data) => {
-      console.log('AJAX data', data);
-      this.setState({post: data});
-    })
+    store.dispatch(getSinglePostAsync(this.props.params.id))
   },
   render: function() {
-    return this.state.post ? (
+    return store.getState().post ? (
       <div style={postsStyle}>
         <h1>Post:</h1>
-        <Post post={this.state.post} />
+        <Post post={store.getState().post} />
       </div>
     ) : null;
   }

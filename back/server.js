@@ -29,10 +29,7 @@ app.get('/posts', (req, res) => {
 });
 
 app.delete('/posts/:id', (req, res) => {
-  Post.remove({_id: req.params.id}, (err, data) => {
-    res.send(req.params.id);
-    console.log('Deleted post', req.params.id);
-  })
+  Post.remove({_id: req.params.id});
 });
 
 //Make a new post

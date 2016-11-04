@@ -36724,27 +36724,22 @@
 	
 	var _Post2 = _interopRequireDefault(_Post);
 	
+	var _actions = __webpack_require__(274);
+	
+	var _store = __webpack_require__(251);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var PostPage = _react2.default.createClass({
 	  displayName: 'PostPage',
-	  getInitialState: function getInitialState() {
-	    return { post: null };
-	  },
 	  componentDidMount: function componentDidMount() {
-	    var _this = this;
-	
-	    _jquery2.default.ajax({
-	      url: '/posts/' + this.props.params.id,
-	      type: 'GET'
-	    }).done(function (data) {
-	      console.log('AJAX data', data);
-	      _this.setState({ post: data });
-	    });
+	    _store2.default.dispatch((0, _actions.getSinglePostAsync)(this.props.params.id));
 	  },
 	
 	  render: function render() {
-	    return this.state.post ? _react2.default.createElement(
+	    return _store2.default.getState().post ? _react2.default.createElement(
 	      'div',
 	      { style: postsStyle },
 	      _react2.default.createElement(
@@ -36752,7 +36747,7 @@
 	        null,
 	        'Post:'
 	      ),
-	      _react2.default.createElement(_Post2.default, { post: this.state.post })
+	      _react2.default.createElement(_Post2.default, { post: _store2.default.getState().post })
 	    ) : null;
 	  }
 	});
@@ -38138,7 +38133,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.deletePostAsync = exports.deletePost = exports.getPostsAsync = exports.getPosts = undefined;
+	exports.deletePostAsync = exports.deletePost = exports.getSinglePostAsync = exports.getSinglePost = exports.getPostsAsync = exports.getPosts = undefined;
 	
 	var _jquery = __webpack_require__(228);
 	
@@ -38161,6 +38156,25 @@
 	    }).done(function (data) {
 	      console.log('data?', data);
 	      dispatch(getPosts(data));
+	    });
+	  };
+	};
+	
+	var getSinglePost = exports.getSinglePost = function getSinglePost(post) {
+	  return {
+	    type: 'GET_SINGLE_POST',
+	    payload: post
+	  };
+	};
+	
+	var getSinglePostAsync = exports.getSinglePostAsync = function getSinglePostAsync(post_id) {
+	  return function (dispatch) {
+	    _jquery2.default.ajax({
+	      url: '/posts/' + post_id,
+	      type: 'GET'
+	    }).done(function (data) {
+	      console.log('AJAX single post data', data);
+	      dispatch(getSinglePost(data));
 	    });
 	  };
 	};
@@ -38199,7 +38213,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var reducer = function reducer() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { posts: [{ title: 'test post 1', text: 'test post 1' }] };
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { posts: [], post: null };
 	  var action = arguments[1];
 	
 	  switch (action.type) {
@@ -38209,6 +38223,8 @@
 	      return Object.assign({}, state, { posts: _lodash2.default.remove(state.posts, function (post) {
 	          return post._id !== action.payload;
 	        }) });
+	    case 'GET_SINGLE_POST':
+	      return Object.assign({}, state, { post: action.payload });
 	    default:
 	      return state;
 	  }
