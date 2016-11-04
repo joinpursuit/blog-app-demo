@@ -1,12 +1,14 @@
 import React from 'react';
 import $ from 'jquery';
 import {Link} from 'react-router';
+import {createPostAsync} from '../actions/actions.js';
+import store from '../store/store.js';
 
 const CreatePost = React.createClass({
   getInitialState() {
     return {
       title: '',
-      body: '',
+      text: '',
       video: ''
     }
   },
@@ -14,15 +16,7 @@ const CreatePost = React.createClass({
     this.setState({[inputField]: e.target.value})
   },
   submitNewPost() {
-    $.ajax({
-      url: '/my-posts',
-      type: 'POST',
-      data: {
-        title: this.state.title,
-        text: this.state.body,
-        video: this.state.video
-      }
-    })
+    store.dispatch(createPostAsync(this.state));
   },
   render(){
     return (
@@ -33,7 +27,7 @@ const CreatePost = React.createClass({
         <br/>
         <br/>
         <label>Body: </label>
-        <input onChange={this.handleChange.bind(this, 'body')} type="body" name="body" />
+        <input onChange={this.handleChange.bind(this, 'text')} type="body" name="body" />
         <br/>
         <br/>
         <label>YouTube Video ID: </label>

@@ -8,6 +8,8 @@ const reducer = (state = {posts: [], post: null}, action) => {
       return Object.assign({}, state, {posts: _.remove(state.posts, (post) => post._id !== action.payload)});
     case 'GET_SINGLE_POST':
       return Object.assign({}, state, {post: action.payload});
+    case 'CREATE_POST':
+      return Object.assign({}, state, {posts: [...state.posts, action.payload]});
     default:
       return state
   }

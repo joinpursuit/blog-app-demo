@@ -36854,6 +36854,12 @@
 	
 	var _reactRouter = __webpack_require__(173);
 	
+	var _actions = __webpack_require__(274);
+	
+	var _store = __webpack_require__(251);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -36863,7 +36869,7 @@
 	  getInitialState: function getInitialState() {
 	    return {
 	      title: '',
-	      body: '',
+	      text: '',
 	      video: ''
 	    };
 	  },
@@ -36871,15 +36877,7 @@
 	    this.setState(_defineProperty({}, inputField, e.target.value));
 	  },
 	  submitNewPost: function submitNewPost() {
-	    _jquery2.default.ajax({
-	      url: '/my-posts',
-	      type: 'POST',
-	      data: {
-	        title: this.state.title,
-	        text: this.state.body,
-	        video: this.state.video
-	      }
-	    });
+	    _store2.default.dispatch((0, _actions.createPostAsync)(this.state));
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -36903,7 +36901,7 @@
 	        null,
 	        'Body: '
 	      ),
-	      _react2.default.createElement('input', { onChange: this.handleChange.bind(this, 'body'), type: 'body', name: 'body' }),
+	      _react2.default.createElement('input', { onChange: this.handleChange.bind(this, 'text'), type: 'body', name: 'body' }),
 	      _react2.default.createElement('br', null),
 	      _react2.default.createElement('br', null),
 	      _react2.default.createElement(
@@ -38133,7 +38131,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.deletePostAsync = exports.deletePost = exports.getSinglePostAsync = exports.getSinglePost = exports.getPostsAsync = exports.getPosts = undefined;
+	exports.createPostAsync = exports.createPost = exports.deletePostAsync = exports.deletePost = exports.getSinglePostAsync = exports.getSinglePost = exports.getPostsAsync = exports.getPosts = undefined;
 	
 	var _jquery = __webpack_require__(228);
 	
@@ -38195,6 +38193,25 @@
 	    dispatch(deletePost(post_id));
 	  };
 	};
+	
+	var createPost = exports.createPost = function createPost(newPost) {
+	  return {
+	    type: 'CREATE_POST',
+	    payload: newPost
+	  };
+	};
+	
+	var createPostAsync = exports.createPostAsync = function createPostAsync(newPost) {
+	  return function (dispatch) {
+	    _jquery2.default.ajax({
+	      url: '/my-posts',
+	      type: 'POST',
+	      data: newPost
+	    }).done(function (data) {
+	      dispatch(createPost(data));
+	    });
+	  };
+	};
 
 /***/ },
 /* 275 */
@@ -38212,6 +38229,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
 	var reducer = function reducer() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { posts: [], post: null };
 	  var action = arguments[1];
@@ -38225,6 +38244,8 @@
 	        }) });
 	    case 'GET_SINGLE_POST':
 	      return Object.assign({}, state, { post: action.payload });
+	    case 'CREATE_POST':
+	      return Object.assign({}, state, { posts: [].concat(_toConsumableArray(state.posts), [action.payload]) });
 	    default:
 	      return state;
 	  }

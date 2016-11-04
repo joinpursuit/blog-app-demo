@@ -34,8 +34,10 @@ app.delete('/posts/:id', (req, res) => {
 
 //Make a new post
 app.post('/my-posts', (req, res) => {
-  Post.create(req.body, () => {
-    console.log('Created new post!');
+  console.log('req body', req.body)
+  Post.create(req.body, (err, data) => {
+    if(err) console.log(err);
+    else res.send(data);
   });
 });
 
