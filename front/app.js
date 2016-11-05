@@ -10,7 +10,6 @@ import Posts from './posts/Posts.jsx';
 import PostPage from './post-page/PostPage.jsx';
 import CreatePost from './create-post/CreatePost.jsx';
 import Navbar from './navbar/Navbar.jsx';
-import HomePage from './home-page/Home.jsx';
 import NoRoute from './NoRoute';
 
 //Redux
@@ -44,7 +43,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={HomePage}/>
+        <IndexRoute component={Posts}/>
         <Route path="create-post" component={CreatePost} />
         <Route path="/post/:id" component={PostPage} />
       </Route>

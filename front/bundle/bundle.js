@@ -89,10 +89,6 @@
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
-	var _Home = __webpack_require__(278);
-	
-	var _Home2 = _interopRequireDefault(_Home);
-	
 	var _NoRoute = __webpack_require__(234);
 	
 	var _NoRoute2 = _interopRequireDefault(_NoRoute);
@@ -106,10 +102,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	//Redux
-	
+	//npm modules
+	console.log('STORE', _store2.default);
 	
 	//Components
-	console.log('STORE', _store2.default); //npm modules
 	
 	
 	var App = _react2.default.createClass({
@@ -145,7 +141,7 @@
 	    _react2.default.createElement(
 	      _reactRouter.Route,
 	      { path: '/', component: App },
-	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
+	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Posts2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: 'create-post', component: _CreatePost2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/post/:id', component: _PostPage2.default })
 	    ),
@@ -36671,10 +36667,12 @@
 	
 	var _Post2 = _interopRequireDefault(_Post);
 	
+	var _reactRedux = __webpack_require__(279);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Posts = function Posts(props) {
-	  return _react2.default.createElement(
+	  return props.posts ? _react2.default.createElement(
 	    'div',
 	    { style: postStyle },
 	    _react2.default.createElement(
@@ -36685,7 +36683,7 @@
 	    props.posts.map(function (post, indx) {
 	      return _react2.default.createElement(_Post2.default, { key: indx, post: post });
 	    })
-	  );
+	  ) : null;
 	};
 	
 	Posts.propTypes = {
@@ -36698,7 +36696,11 @@
 	  alignItems: 'center'
 	};
 	
-	exports.default = Posts;
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
+	  return { posts: state.posts };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Posts);
 
 /***/ },
 /* 230 */
@@ -55292,48 +55294,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(266)(module)))
 
 /***/ },
-/* 278 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _store = __webpack_require__(251);
-	
-	var _store2 = _interopRequireDefault(_store);
-	
-	var _Posts = __webpack_require__(229);
-	
-	var _Posts2 = _interopRequireDefault(_Posts);
-	
-	var _reactRedux = __webpack_require__(279);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var HomePage = function HomePage(props) {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(_Posts2.default, { posts: props.posts })
-	  );
-	};
-	
-	var mapStateToProps = function mapStateToProps(state, ownProps) {
-	  return {
-	    posts: state.posts
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(HomePage);
-
-/***/ },
+/* 278 */,
 /* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
