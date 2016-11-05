@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import {Link} from 'react-router';
-import {createPostAsync} from '../actions/actions.js';
+import {createPostAsync} from './create-post-actions';
 import store from '../store/store.js';
 
 const CreatePost = React.createClass({

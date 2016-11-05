@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import YouTube from '../youtube/YouTube.jsx';
 import $ from 'jquery';
-import {deletePostAsync, getSinglePostAsync} from '../actions/actions.js';
+import {deletePostAsync, getSinglePostAsync} from './post-actions';
 import store from '../store/store.js';
 import {connect} from 'react-redux';
 

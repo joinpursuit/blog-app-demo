@@ -97,7 +97,7 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _actions = __webpack_require__(274);
+	var _postsActions = __webpack_require__(288);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -111,7 +111,7 @@
 	var App = _react2.default.createClass({
 	  displayName: 'App',
 	  componentDidMount: function componentDidMount() {
-	    _store2.default.dispatch((0, _actions.getPostsAsync)());
+	    _store2.default.dispatch((0, _postsActions.getPostsAsync)());
 	  },
 	
 	  render: function render() {
@@ -36727,7 +36727,7 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _actions = __webpack_require__(274);
+	var _postActions = __webpack_require__(286);
 	
 	var _store = __webpack_require__(251);
 	
@@ -36740,10 +36740,10 @@
 	var Post = _react2.default.createClass({
 	  displayName: 'Post',
 	  deletePost: function deletePost() {
-	    _store2.default.dispatch((0, _actions.deletePostAsync)(this.props.post._id));
+	    _store2.default.dispatch((0, _postActions.deletePostAsync)(this.props.post._id));
 	  },
 	  componentDidMount: function componentDidMount() {
-	    if (!this.props.post) _store2.default.dispatch((0, _actions.getSinglePostAsync)(this.props.params.id));
+	    if (!this.props.post) _store2.default.dispatch((0, _postActions.getSinglePostAsync)(this.props.params.id));
 	  },
 	
 	  render: function render() {
@@ -36804,7 +36804,7 @@
 	
 	var _reactRouter = __webpack_require__(173);
 	
-	var _actions = __webpack_require__(274);
+	var _createPostActions = __webpack_require__(287);
 	
 	var _store = __webpack_require__(251);
 	
@@ -36827,7 +36827,7 @@
 	    this.setState(_defineProperty({}, inputField, e.target.value));
 	  },
 	  submitNewPost: function submitNewPost() {
-	    _store2.default.dispatch((0, _actions.createPostAsync)(this.state));
+	    _store2.default.dispatch((0, _createPostActions.createPostAsync)(this.state));
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -38081,97 +38081,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 274 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.createPostAsync = exports.createPost = exports.deletePostAsync = exports.deletePost = exports.getSinglePostAsync = exports.getSinglePost = exports.getPostsAsync = exports.getPosts = undefined;
-	
-	var _jquery = __webpack_require__(228);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var getPosts = exports.getPosts = function getPosts(posts) {
-	  return {
-	    type: 'GET_POSTS',
-	    payload: posts
-	  };
-	};
-	
-	var getPostsAsync = exports.getPostsAsync = function getPostsAsync() {
-	  return function (dispatch) {
-	    return _jquery2.default.ajax({
-	      url: '/posts',
-	      type: 'GET'
-	    }).done(function (data) {
-	      console.log('data?', data);
-	      dispatch(getPosts(data));
-	    });
-	  };
-	};
-	
-	var getSinglePost = exports.getSinglePost = function getSinglePost(post) {
-	  return {
-	    type: 'GET_SINGLE_POST',
-	    payload: post
-	  };
-	};
-	
-	var getSinglePostAsync = exports.getSinglePostAsync = function getSinglePostAsync(post_id) {
-	  return function (dispatch) {
-	    _jquery2.default.ajax({
-	      url: '/posts/' + post_id,
-	      type: 'GET'
-	    }).done(function (data) {
-	      console.log('AJAX single post data', data);
-	      dispatch(getSinglePost(data));
-	    });
-	  };
-	};
-	
-	var deletePost = exports.deletePost = function deletePost(post_id) {
-	  return {
-	    type: 'DELETE_POST',
-	    payload: post_id
-	  };
-	};
-	
-	var deletePostAsync = exports.deletePostAsync = function deletePostAsync(post_id) {
-	  return function (dispatch) {
-	    _jquery2.default.ajax({
-	      url: '/posts/' + post_id,
-	      type: 'DElETE'
-	    });
-	    dispatch(deletePost(post_id));
-	  };
-	};
-	
-	var createPost = exports.createPost = function createPost(newPost) {
-	  return {
-	    type: 'CREATE_POST',
-	    payload: newPost
-	  };
-	};
-	
-	var createPostAsync = exports.createPostAsync = function createPostAsync(newPost) {
-	  return function (dispatch) {
-	    _jquery2.default.ajax({
-	      url: '/my-posts',
-	      type: 'POST',
-	      data: newPost
-	    }).done(function (data) {
-	      dispatch(createPost(data));
-	    });
-	  };
-	};
-
-/***/ },
+/* 274 */,
 /* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -55839,6 +55749,131 @@
 	    return (0, _redux.bindActionCreators)(actionCreators, dispatch);
 	  };
 	}
+
+/***/ },
+/* 286 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.deletePostAsync = exports.deletePost = exports.getSinglePostAsync = exports.getSinglePost = undefined;
+	
+	var _jquery = __webpack_require__(228);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var getSinglePost = exports.getSinglePost = function getSinglePost(post) {
+	  return {
+	    type: 'GET_SINGLE_POST',
+	    payload: post
+	  };
+	};
+	
+	var getSinglePostAsync = exports.getSinglePostAsync = function getSinglePostAsync(post_id) {
+	  return function (dispatch) {
+	    _jquery2.default.ajax({
+	      url: '/posts/' + post_id,
+	      type: 'GET'
+	    }).done(function (data) {
+	      console.log('AJAX single post data', data);
+	      dispatch(getSinglePost(data));
+	    });
+	  };
+	};
+	
+	var deletePost = exports.deletePost = function deletePost(post_id) {
+	  return {
+	    type: 'DELETE_POST',
+	    payload: post_id
+	  };
+	};
+	
+	var deletePostAsync = exports.deletePostAsync = function deletePostAsync(post_id) {
+	  return function (dispatch) {
+	    _jquery2.default.ajax({
+	      url: '/posts/' + post_id,
+	      type: 'DElETE'
+	    });
+	    dispatch(deletePost(post_id));
+	  };
+	};
+
+/***/ },
+/* 287 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.createPostAsync = exports.createPost = undefined;
+	
+	var _jquery = __webpack_require__(228);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var createPost = exports.createPost = function createPost(newPost) {
+	  return {
+	    type: 'CREATE_POST',
+	    payload: newPost
+	  };
+	};
+	
+	var createPostAsync = exports.createPostAsync = function createPostAsync(newPost) {
+	  return function (dispatch) {
+	    _jquery2.default.ajax({
+	      url: '/my-posts',
+	      type: 'POST',
+	      data: newPost
+	    }).done(function (data) {
+	      dispatch(createPost(data));
+	    });
+	  };
+	};
+
+/***/ },
+/* 288 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.getPostsAsync = exports.getPosts = undefined;
+	
+	var _jquery = __webpack_require__(228);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var getPosts = exports.getPosts = function getPosts(posts) {
+	  return {
+	    type: 'GET_POSTS',
+	    payload: posts
+	  };
+	};
+	
+	var getPostsAsync = exports.getPostsAsync = function getPostsAsync() {
+	  return function (dispatch) {
+	    return _jquery2.default.ajax({
+	      url: '/posts',
+	      type: 'GET'
+	    }).done(function (data) {
+	      console.log('data?', data);
+	      dispatch(getPosts(data));
+	    });
+	  };
+	};
 
 /***/ }
 /******/ ]);

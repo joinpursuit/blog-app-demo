@@ -14,7 +14,7 @@ import NoRoute from './NoRoute';
 
 //Redux
 import store from './store/store.js';
-import {getPostsAsync} from './actions/actions.js';
+import {getPostsAsync} from './posts/posts-actions.js';
 console.log('STORE', store)
 
 const App = React.createClass({
