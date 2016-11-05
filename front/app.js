@@ -7,7 +7,7 @@ import {Provider} from 'react-redux';
 
 //Components
 import Posts from './posts/Posts.jsx';
-import PostPage from './post-page/PostPage.jsx';
+import Post from './post/Post.jsx';
 import CreatePost from './create-post/CreatePost.jsx';
 import Navbar from './navbar/Navbar.jsx';
 import NoRoute from './NoRoute';
@@ -44,8 +44,8 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Posts}/>
-        <Route path="create-post" component={CreatePost} />
-        <Route path="/post/:id" component={PostPage} />
+        <Route path="/create-post" component={CreatePost} />
+        <Route path="/post/:id" component={Post} />
       </Route>
       <Route path="*" component={NoRoute} />
     </Router>

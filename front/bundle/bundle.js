@@ -77,9 +77,9 @@
 	
 	var _Posts2 = _interopRequireDefault(_Posts);
 	
-	var _PostPage = __webpack_require__(230);
+	var _Post = __webpack_require__(231);
 	
-	var _PostPage2 = _interopRequireDefault(_PostPage);
+	var _Post2 = _interopRequireDefault(_Post);
 	
 	var _CreatePost = __webpack_require__(232);
 	
@@ -142,8 +142,8 @@
 	      _reactRouter.Route,
 	      { path: '/', component: App },
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Posts2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: 'create-post', component: _CreatePost2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: '/post/:id', component: _PostPage2.default })
+	      _react2.default.createElement(_reactRouter.Route, { path: '/create-post', component: _CreatePost2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/post/:id', component: _Post2.default })
 	    ),
 	    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _NoRoute2.default })
 	  )
@@ -36703,68 +36703,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Posts);
 
 /***/ },
-/* 230 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _jquery = __webpack_require__(228);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _Post = __webpack_require__(231);
-	
-	var _Post2 = _interopRequireDefault(_Post);
-	
-	var _actions = __webpack_require__(274);
-	
-	var _store = __webpack_require__(251);
-	
-	var _store2 = _interopRequireDefault(_store);
-	
-	var _reactRedux = __webpack_require__(279);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var PostPage = _react2.default.createClass({
-	  displayName: 'PostPage',
-	  componentDidMount: function componentDidMount() {
-	    _store2.default.dispatch((0, _actions.getSinglePostAsync)(this.props.params.id));
-	  },
-	
-	  render: function render() {
-	    return this.props.post ? _react2.default.createElement(
-	      'div',
-	      { style: postsStyle },
-	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        'Post:'
-	      ),
-	      _react2.default.createElement(_Post2.default, { post: this.props.post })
-	    ) : null;
-	  }
-	});
-	
-	var postsStyle = {
-	  backgroundColor: 'azure'
-	};
-	
-	var mapStateToProps = function mapStateToProps(state, ownProps) {
-	  return { post: state.post };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(PostPage);
-
-/***/ },
+/* 230 */,
 /* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -36794,6 +36733,8 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
+	var _reactRedux = __webpack_require__(279);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Post = _react2.default.createClass({
@@ -36801,9 +36742,12 @@
 	  deletePost: function deletePost() {
 	    _store2.default.dispatch((0, _actions.deletePostAsync)(this.props.post._id));
 	  },
+	  componentDidMount: function componentDidMount() {
+	    if (!this.props.post) _store2.default.dispatch((0, _actions.getSinglePostAsync)(this.props.params.id));
+	  },
 	
 	  render: function render() {
-	    return _react2.default.createElement(
+	    return this.props.post ? _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(
@@ -36826,7 +36770,7 @@
 	        { onClick: this.deletePost },
 	        'Delete this post'
 	      )
-	    );
+	    ) : null;
 	  }
 	});
 	
@@ -36834,7 +36778,11 @@
 	  post: _react2.default.PropTypes.object
 	};
 	
-	exports.default = Post;
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
+	  return ownProps.post ? { post: ownProps.post } : { post: state.post };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Post);
 
 /***/ },
 /* 232 */

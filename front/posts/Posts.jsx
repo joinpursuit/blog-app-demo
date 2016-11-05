@@ -3,12 +3,14 @@ import Post from '../post/Post.jsx';
 import {connect} from 'react-redux'
 
 const Posts = (props) => (
-  props.posts ?
+  props.posts
+  ?
   <div style={postStyle}>
     <h1>Posts:</h1>
     {props.posts.map((post, indx) => <Post key={indx} post={post} />)}
   </div>
-  : null
+  :
+  null
 )
 
 Posts.propTypes = {
