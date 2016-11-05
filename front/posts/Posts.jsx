@@ -1,16 +1,12 @@
 import React from 'react';
 import Post from '../post/Post.jsx';
 
-const Posts = React.createClass({
-  render: function() {
-    return (
-      <div style={postStyle}>
-        <h1>Posts:</h1>
-        {this.props.posts.map((post, indx) => <Post key={indx} post={post} />)}
-      </div>
-    );
-  }
-});
+const Posts = (props) => (
+  <div style={postStyle}>
+    <h1>Posts:</h1>
+    {props.posts.map((post, indx) => <Post key={indx} post={post} />)}
+  </div>
+)
 
 Posts.propTypes = {
   posts: React.PropTypes.array

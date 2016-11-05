@@ -36673,24 +36673,20 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Posts = _react2.default.createClass({
-	  displayName: 'Posts',
-	
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      { style: postStyle },
-	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        'Posts:'
-	      ),
-	      this.props.posts.map(function (post, indx) {
-	        return _react2.default.createElement(_Post2.default, { key: indx, post: post });
-	      })
-	    );
-	  }
-	});
+	var Posts = function Posts(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    { style: postStyle },
+	    _react2.default.createElement(
+	      'h1',
+	      null,
+	      'Posts:'
+	    ),
+	    props.posts.map(function (post, indx) {
+	      return _react2.default.createElement(_Post2.default, { key: indx, post: post });
+	    })
+	  );
+	};
 	
 	Posts.propTypes = {
 	  posts: _react2.default.PropTypes.array
