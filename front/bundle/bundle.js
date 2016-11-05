@@ -67,10 +67,6 @@
 	
 	var _reactRouter = __webpack_require__(173);
 	
-	var _jquery = __webpack_require__(228);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
 	var _reactRedux = __webpack_require__(279);
 	
 	var _Posts = __webpack_require__(229);
@@ -89,7 +85,7 @@
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
-	var _NoRoute = __webpack_require__(234);
+	var _NoRoute = __webpack_require__(289);
 	
 	var _NoRoute2 = _interopRequireDefault(_NoRoute);
 	
@@ -102,12 +98,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	//Redux
-	//npm modules
-	console.log('STORE', _store2.default);
-	
-	//Components
-	
-	
 	var App = _react2.default.createClass({
 	  displayName: 'App',
 	  componentDidMount: function componentDidMount() {
@@ -124,6 +114,10 @@
 	  }
 	
 	});
+	
+	//Components
+	//npm modules
+	
 	
 	var appStyles = {
 	  backgroundColor: 'azure',
@@ -36723,10 +36717,6 @@
 	
 	var _YouTube2 = _interopRequireDefault(_YouTube);
 	
-	var _jquery = __webpack_require__(228);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
 	var _postActions = __webpack_require__(286);
 	
 	var _store = __webpack_require__(251);
@@ -36737,42 +36727,33 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Post = _react2.default.createClass({
-	  displayName: 'Post',
-	  deletePost: function deletePost() {
-	    _store2.default.dispatch((0, _postActions.deletePostAsync)(this.props.post._id));
-	  },
-	  componentDidMount: function componentDidMount() {
-	    if (!this.props.post) _store2.default.dispatch((0, _postActions.getSinglePostAsync)(this.props.params.id));
-	  },
-	
-	  render: function render() {
-	    return this.props.post ? _react2.default.createElement(
-	      'div',
-	      null,
+	var Post = function Post(props) {
+	  if (!props.post || props.params && props.post._id !== props.params.id) _store2.default.dispatch((0, _postActions.getSinglePostAsync)(props.params.id));
+	  return props.post ? _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '/post/' + props.post._id },
 	      _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: '/post/' + this.props.post._id },
-	        _react2.default.createElement(
-	          'h2',
-	          null,
-	          this.props.post.title
-	        )
-	      ),
-	      _react2.default.createElement(_YouTube2.default, { videoId: this.props.post.video }),
-	      _react2.default.createElement(
-	        'p',
+	        'h2',
 	        null,
-	        this.props.post.text
-	      ),
-	      _react2.default.createElement(
-	        'button',
-	        { onClick: this.deletePost },
-	        'Delete this post'
+	        props.post.title
 	      )
-	    ) : null;
-	  }
-	});
+	    ),
+	    _react2.default.createElement(_YouTube2.default, { videoId: props.post.video }),
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      props.post.text
+	    ),
+	    _react2.default.createElement(
+	      'button',
+	      { onClick: _store2.default.dispatch.bind(undefined, (0, _postActions.deletePostAsync)(props.post._id)) },
+	      'Delete this post'
+	    )
+	  ) : null;
+	};
 	
 	Post.propTypes = {
 	  post: _react2.default.PropTypes.object
@@ -36883,41 +36864,7 @@
 
 /***/ },
 /* 233 */,
-/* 234 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var NoRoute = _react2.default.createClass({
-	  displayName: 'NoRoute',
-	
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        '\'404\''
-	      )
-	    );
-	  }
-	
-	});
-	
-	exports.default = NoRoute;
-
-/***/ },
+/* 234 */,
 /* 235 */,
 /* 236 */,
 /* 237 */,
@@ -36953,10 +36900,10 @@
 	  return _react2.default.createElement(
 	    'ul',
 	    null,
-	    props.links.map(function (link) {
+	    props.links.map(function (link, indx) {
 	      return _react2.default.createElement(
 	        'li',
-	        null,
+	        { key: indx },
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: link.url },
@@ -37009,13 +36956,11 @@
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reducer = __webpack_require__(275);
-	
-	var _reducer2 = _interopRequireDefault(_reducer);
+	var _index = __webpack_require__(290);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var store = (0, _redux.createStore)(_reducer2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+	var store = (0, _redux.createStore)(_index.reducer, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 	
 	exports.default = store;
 
@@ -38082,50 +38027,7 @@
 
 /***/ },
 /* 274 */,
-/* 275 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _lodash = __webpack_require__(277);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
-	var reducer = function reducer() {
-	  var _ref;
-	
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { posts: [], post: null, links: [(_ref = { title: 'Posts', url: '/' }, _defineProperty(_ref, 'title', 'Create Post'), _defineProperty(_ref, 'url', 'create-post'), _ref)] };
-	  var action = arguments[1];
-	
-	  switch (action.type) {
-	    case 'GET_POSTS':
-	      return Object.assign({}, state, { posts: action.payload });
-	    case 'DELETE_POST':
-	      return Object.assign({}, state, { posts: _lodash2.default.remove(state.posts, function (post) {
-	          return post._id !== action.payload;
-	        }) });
-	    case 'GET_SINGLE_POST':
-	      return Object.assign({}, state, { post: action.payload });
-	    case 'CREATE_POST':
-	      return Object.assign({}, state, { posts: [].concat(_toConsumableArray(state.posts), [action.payload]) });
-	    default:
-	      return state;
-	  }
-	};
-	
-	exports.default = reducer;
-
-/***/ },
+/* 275 */,
 /* 276 */,
 /* 277 */
 /***/ function(module, exports, __webpack_require__) {
@@ -55874,6 +55776,127 @@
 	    });
 	  };
 	};
+
+/***/ },
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var NoRoute = function NoRoute() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'h1',
+	      null,
+	      '404'
+	    )
+	  );
+	};
+	
+	exports.default = NoRoute;
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.reducer = undefined;
+	
+	var _postReducer = __webpack_require__(291);
+	
+	var _postReducer2 = _interopRequireDefault(_postReducer);
+	
+	var _postsReducer = __webpack_require__(293);
+	
+	var _postsReducer2 = _interopRequireDefault(_postsReducer);
+	
+	var _redux = __webpack_require__(252);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var reducer = (0, _redux.combineReducers)({
+	  posts: _postsReducer2.default,
+	  post: _postReducer2.default
+	}); //reducers
+	exports.reducer = reducer;
+
+/***/ },
+/* 291 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var post = function post() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'GET_SINGLE_POST':
+	      return action.payload;
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = post;
+
+/***/ },
+/* 292 */,
+/* 293 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _lodash = __webpack_require__(277);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	var posts = function posts() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'GET_POSTS':
+	      return action.payload;
+	    case 'DELETE_POST':
+	      return _lodash2.default.remove(state, function (post) {
+	        return post._id !== action.payload;
+	      });
+	    case 'CREATE_POST':
+	      return [].concat(_toConsumableArray(state), [action.payload]);
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = posts;
 
 /***/ }
 /******/ ]);

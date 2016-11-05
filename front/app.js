@@ -2,7 +2,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-import $ from 'jquery';
 import {Provider} from 'react-redux';
 
 //Components
@@ -10,12 +9,11 @@ import Posts from './posts/Posts.jsx';
 import Post from './post/Post.jsx';
 import CreatePost from './create-post/CreatePost.jsx';
 import Navbar from './navbar/Navbar.jsx';
-import NoRoute from './NoRoute';
+import NoRoute from './404/NoRoute';
 
 //Redux
 import store from './store/store.js';
 import {getPostsAsync} from './posts/posts-actions.js';
-console.log('STORE', store)
 
 const App = React.createClass({
   componentDidMount() {
