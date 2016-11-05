@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import $ from 'jquery';
+import {Provider} from 'react-redux';
 
 //Components
 import Posts from './posts/Posts.jsx';
@@ -15,6 +16,7 @@ import NoRoute from './NoRoute';
 //Redux
 import store from './store/store.js';
 import {getPostsAsync} from './actions/actions.js';
+console.log('STORE', store)
 
 const App = React.createClass({
   componentDidMount() {
@@ -38,31 +40,20 @@ const appStyles = {
   flexDirection: 'column'
 }
 
-// ReactDOM.render(
-//   <Router history={browserHistory}>
-//     <Route path="/" component={App} />
-//     <Route path="create-post" component={CreatePost} />
-//     <Route path="/post/:id" component={PostPage} />
-//     <Route path="*" component={NoRoute} />
-//   </Router>,
-//   document.getElementById('root')
-// )
-
-
-const render = () => ReactDOM.render(
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute component={HomePage}/>
-      <Route path="create-post" component={CreatePost} />
-      <Route path="/post/:id" component={PostPage} />
-    </Route>
-    <Route path="*" component={NoRoute} />
-  </Router>,
+ReactDOM.render(
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <IndexRoute component={HomePage}/>
+        <Route path="create-post" component={CreatePost} />
+        <Route path="/post/:id" component={PostPage} />
+      </Route>
+      <Route path="*" component={NoRoute} />
+    </Router>
+  </Provider>,
   document.getElementById('root')
-);
+)
 
-render();
-store.subscribe(render);
 
 
 export default App;

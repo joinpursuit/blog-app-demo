@@ -10,7 +10,6 @@ const Posts = React.createClass({
       </div>
     );
   }
-
 });
 
 Posts.propTypes = {
