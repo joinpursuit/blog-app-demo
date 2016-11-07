@@ -28,6 +28,12 @@ app.get('/posts', (req, res) => {
   })
 });
 
+app.post('/posts', (req, res) => {
+  Post.find({}, (err, data) => {
+    res.send(data);
+  })
+});
+
 app.delete('/posts/:id', (req, res) => {
   Post.remove({_id: req.params.id});
 });
