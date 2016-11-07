@@ -63,7 +63,8 @@ app.post('/comments', (req, res) => {
 //Get an individual post
 app.get('/posts/:id', (req, res) => {
   Post.findById(req.params.id, (err, data) => {
-    res.send(data);
+    console.log('data', data);
+    res.json(data);
   })
 });
 
@@ -71,8 +72,6 @@ app.get('/posts/:id', (req, res) => {
 app.get('/*', (req, res) => {
   res.sendFile(`${rootPath}/front/index.html`);
 });
-
-
 
 db.on('open', () => {
   console.log('db connection opened!');

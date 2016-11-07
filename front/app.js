@@ -14,6 +14,7 @@ import NoRoute from './404/NoRoute';
 //Redux
 import store from './store/store.js';
 import {getPostsAsync} from './posts/posts-actions.js';
+import {getSinglePostAsync} from './post/post-actions.js';
 
 const App = React.createClass({
   componentDidMount() {
@@ -37,13 +38,17 @@ const appStyles = {
   flexDirection: 'column'
 }
 
+const handleEnter = (nextState) => {
+  store.dispatch(getSinglePostAsync(nextState.params.id))
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Posts}/>
         <Route path="/create-post" component={CreatePost} />
-        <Route path="/post/:id" component={Post} />
+        <Route path="/post/:id" component={Post} onEnter={handleEnter} />
       </Route>
       <Route path="*" component={NoRoute} />
     </Router>

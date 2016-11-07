@@ -6,7 +6,7 @@ import store from '../store/store.js';
 import {connect} from 'react-redux';
 
 const Post = (props) => {
-  if(!props.post || props.params && props.post._id !== props.params.id) store.dispatch(getSinglePostAsync(props.params.id));
+  // if(!props.post || props.params && props.post._id !== props.params.id) store.dispatch(getSinglePostAsync(props.params.id));
   return props.post ? (
    <div>
      <Link to={`/post/${props.post._id}`}><h2>{props.post.title}</h2></Link>
