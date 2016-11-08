@@ -28194,7 +28194,7 @@
 	var YouTube = function YouTube(props) {
 	  return _react2.default.createElement("iframe", { id: "ytplayer", type: "text/html", width: "320", height: "180",
 	    src: "https://www.youtube.com/embed/" + props.videoId,
-	    frameborder: "0" });
+	    frameBorder: "0" });
 	};
 	
 	exports.default = YouTube;
@@ -55876,7 +55876,6 @@
 	      url: '/posts',
 	      type: 'GET'
 	    }).done(function (data) {
-	      console.log('data?', data);
 	      dispatch(getPosts(data));
 	    });
 	  };

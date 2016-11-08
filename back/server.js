@@ -28,12 +28,6 @@ app.get('/posts', (req, res) => {
   })
 });
 
-app.post('/posts', (req, res) => {
-  Post.find({}, (err, data) => {
-    res.send(data);
-  })
-});
-
 app.delete('/posts/:id', (req, res) => {
   Post.remove({_id: req.params.id});
 });
@@ -78,6 +72,8 @@ app.get('/posts/:id', (req, res) => {
 app.get('/*', (req, res) => {
   res.sendFile(`${rootPath}/front/index.html`);
 });
+
+
 
 db.on('open', () => {
   console.log('db connection opened!');

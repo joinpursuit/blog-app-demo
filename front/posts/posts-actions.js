@@ -11,7 +11,6 @@ export const getPostsAsync = () => dispatch => {
       type: 'GET'
     })
     .done((data) => {
-      console.log('data?', data)
       dispatch(getPosts(data))
     })
 }
