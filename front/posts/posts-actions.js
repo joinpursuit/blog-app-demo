@@ -6,6 +6,7 @@ export const getPosts = posts => ({
 })
 
 export const getPostsAsync = () => dispatch => {
+  console.log('async');
   return $.ajax({
       url: '/posts',
       type: 'GET'
