@@ -3,9 +3,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const postModel = require('./posts/posts-model');
-const commentModel = require('./comments/comments-model');
 const Post = mongoose.model('Post');
-const Comment = mongoose.model('Comment');
 const path = require('path');
 const rootPath = path.join(__dirname, '..');
 const bodyParser = require('body-parser');
@@ -29,7 +27,10 @@ app.get('/posts', (req, res) => {
 });
 
 app.delete('/posts/:id', (req, res) => {
-  Post.remove({_id: req.params.id});
+  Post.remove({_id: req.params.id}, (err, data) => {
+    if (err) console.error('Mongoose delete error', err);
+    else console.log('Delete successful');
+  });
 });
 
 //Make a new post

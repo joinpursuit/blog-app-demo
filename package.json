@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aphrodite": "^1.1.0",
     "babel": "^6.5.2",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",

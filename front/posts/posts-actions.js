@@ -5,9 +5,8 @@ export const getPosts = posts => ({
   payload: posts
 })
 
-export const getPostsAsync = () => dispatch => {
-  console.log('async');
-  return $.ajax({
+export const getPostsAsync = () => (dispatch) => {
+  $.ajax({
       url: '/posts',
       type: 'GET'
     })

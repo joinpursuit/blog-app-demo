@@ -16,31 +16,29 @@ import store from './store/store.js';
 import {getPostsAsync} from './posts/posts-actions.js';
 import {getSinglePostAsync} from './post/post-actions.js';
 
+//style
+import {css} from 'aphrodite'
+import styles from './styles'
+
 const App = (props) => (
-    <div style={appStyles}>
+    <div >
       <Navbar links={[{title: 'Posts', url: '/'}, {title: 'CreatePost', url: 'create-post'}]}/>
       {props.children}
     </div>
 )
 
-const appStyles = {
-  backgroundColor: 'azure',
-  display: 'flex',
-  alignItems: 'center',
-  flexDirection: 'column'
-}
-
 const getPost = (nextState) => {store.dispatch(getSinglePostAsync(nextState.params.id))}
 const getAllPosts = () => {store.dispatch(getPostsAsync())}
+const logEnter = (nextState) => {console.log('Next state:', nextState);}
 
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={PostsContainer} onEnter={getAllPosts} />
+        <IndexRoute component={PostsContainer}  onEnter={getAllPosts}/>
         <Route path="/create-post" component={CreatePost} />
-        <Route path="/post/:id" component={PostContainer} onEnter={getPost} />
+        <Route path="/post/:id" component={PostContainer}  onEnter={getPost}/>
       </Route>
       <Route path="*" component={NoRoute} />
     </Router>
