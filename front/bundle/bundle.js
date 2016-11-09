@@ -28071,30 +28071,17 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var PostsContainer = _react2.default.createClass({
-	  displayName: 'PostsContainer',
-	  renderPosts: function renderPosts() {
-	    return _react2.default.createElement(_Posts2.default, { posts: this.props.posts });
-	  },
-	  renderLoading: function renderLoading() {
-	    return _react2.default.createElement(
-	      'h1',
-	      null,
-	      'Loading...'
-	    );
-	  },
-	  render: function render() {
-	    return this.props.posts ? this.renderPosts() : this.renderLoading();
-	  }
-	});
+	var PostsContainer = function PostsContainer(props) {
+	  return props.posts ? _react2.default.createElement(_Posts2.default, { posts: props.posts }) : _react2.default.createElement(
+	    'h1',
+	    null,
+	    'Loading...'
+	  );
+	};
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 	  return { posts: state.posts };
 	};
-	
-	// const mapDispatchToprops = (dispatch) => ({
-	//   getPostsAsync: dispatch(getPostsAsync())
-	// })
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(PostsContainer);
 
@@ -55698,23 +55685,13 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var PostContainer = _react2.default.createClass({
-	  displayName: 'PostContainer',
-	  renderPost: function renderPost() {
-	    return _react2.default.createElement(_Post2.default, { post: this.props.post });
-	  },
-	  renderLoading: function renderLoading() {
-	    return _react2.default.createElement(
-	      'h1',
-	      null,
-	      'Loading...'
-	    );
-	  },
-	  render: function render() {
-	    //Check to see if a post has been passed down through props && if the post currently saved in state is the same post we're tryign to load
-	    return this.props.post && this.props.post._id === this.props.params.id ? this.renderPost() : this.renderLoading();
-	  }
-	});
+	var PostContainer = function PostContainer(props) {
+	  return props.post && props.post._id === props.params.id ? _react2.default.createElement(_Post2.default, { post: props.post }) : _react2.default.createElement(
+	    'h1',
+	    null,
+	    'Loading...'
+	  );
+	};
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 	  return ownProps.post ? { post: ownProps.post } : { post: state.post };
