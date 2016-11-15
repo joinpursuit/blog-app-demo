@@ -9,7 +9,7 @@ import PostsContainer from './posts/PostsContainer.jsx';
 import PostContainer from './post/PostContainer.jsx';
 import CreatePost from './create-post/CreatePost.jsx';
 import Navbar from './navbar/Navbar.jsx';
-import NoRoute from './404/NoRoute';
+import NoRoute from './404/NoRoute.jsx';
 
 //Redux
 import store from './store/store.js';

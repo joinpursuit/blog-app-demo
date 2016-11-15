@@ -85,7 +85,7 @@
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
-	var _NoRoute = __webpack_require__(273);
+	var _NoRoute = __webpack_require__(298);
 	
 	var _NoRoute2 = _interopRequireDefault(_NoRoute);
 	
@@ -55924,36 +55924,7 @@
 	exports.default = Navbar;
 
 /***/ },
-/* 273 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var NoRoute = function NoRoute() {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'h1',
-	      null,
-	      '404'
-	    )
-	  );
-	};
-	
-	exports.default = NoRoute;
-
-/***/ },
+/* 273 */,
 /* 274 */,
 /* 275 */,
 /* 276 */,
@@ -56003,6 +55974,36 @@
 	var getAllPosts = exports.getAllPosts = function getAllPosts() {
 	  _store2.default.dispatch((0, _postsActions.getPostsAsync)());
 	};
+
+/***/ },
+/* 298 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var NoRoute = function NoRoute() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'h1',
+	      null,
+	      '404'
+	    )
+	  );
+	};
+	
+	exports.default = NoRoute;
 
 /***/ }
 /******/ ]);
