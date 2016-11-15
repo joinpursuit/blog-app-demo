@@ -16,9 +16,6 @@ import store from './store/store.js';
 import {getPostsAsync} from './posts/posts-actions.js';
 import {getSinglePostAsync} from './post/post-actions.js';
 
-//style
-import {css} from 'aphrodite'
-import styles from './styles'
 
 const App = (props) => (
     <div >
@@ -29,8 +26,6 @@ const App = (props) => (
 
 const getPost = (nextState) => {store.dispatch(getSinglePostAsync(nextState.params.id))}
 const getAllPosts = () => {store.dispatch(getPostsAsync())}
-const logEnter = (nextState) => {console.log('Next state:', nextState);}
-
 
 ReactDOM.render(
   <Provider store={store}>

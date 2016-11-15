@@ -7,7 +7,7 @@ export const createPost = newPost => ({
 
 export const createPostAsync = (newPost) => dispatch => {
   $.ajax({
-    url: '/my-posts',
+    url: '/posts',
     type: 'POST',
     data: newPost
   })

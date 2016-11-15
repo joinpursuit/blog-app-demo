@@ -1,12 +1,7 @@
-//BLOG POSTS:
-//Title of blog posts
-//Date posted
-//Blog post text
-//Categories/tags
-//Images for post
-//Comments on posts
-//Author of blog posts
-//archive: Boolean
+/////////////////////////
+// database model for blog posts
+/////////////////////////
+
 const mongoose = require('mongoose');
 const blogSchema = mongoose.Schema({
   title: {type: String, required: true},
@@ -15,5 +10,5 @@ const blogSchema = mongoose.Schema({
   author: String
 });
 
-//First argument is name of model, second argument is schema
+//first argument is name of model, second argument is schema (aka blueprint)
 const Post = mongoose.model('Post', blogSchema);

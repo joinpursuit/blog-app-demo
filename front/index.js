@@ -7,6 +7,8 @@ const reducer = combineReducers({
   post
 });
 
+
+//export an object that contains reducers, actions, and models
 export {
   reducer
 }
