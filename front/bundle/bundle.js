@@ -93,14 +93,11 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _postsActions = __webpack_require__(268);
-	
-	var _postActions = __webpack_require__(266);
+	var _routeUtils = __webpack_require__(297);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	//Components
-	//npm modules
+	//Redux
 	var App = function App(props) {
 	  return _react2.default.createElement(
 	    'div',
@@ -110,15 +107,12 @@
 	  );
 	};
 	
-	//Redux
+	//Route utils
 	
 	
-	var getPost = function getPost(nextState) {
-	  _store2.default.dispatch((0, _postActions.getSinglePostAsync)(nextState.params.id));
-	};
-	var getAllPosts = function getAllPosts() {
-	  _store2.default.dispatch((0, _postsActions.getPostsAsync)());
-	};
+	//Components
+	//npm modules
+	
 	
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
@@ -129,9 +123,9 @@
 	    _react2.default.createElement(
 	      _reactRouter.Route,
 	      { path: '/', component: App },
-	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _PostsContainer2.default, onEnter: getAllPosts }),
+	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _PostsContainer2.default, onEnter: _routeUtils.getAllPosts }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/create-post', component: _CreatePost2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: '/post/:id', component: _PostContainer2.default, onEnter: getPost })
+	      _react2.default.createElement(_reactRouter.Route, { path: '/post/:id', component: _PostContainer2.default, onEnter: _routeUtils.getPost })
 	    ),
 	    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _NoRoute2.default })
 	  )
@@ -55958,6 +55952,57 @@
 	};
 	
 	exports.default = NoRoute;
+
+/***/ },
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.getAllPosts = exports.getPost = undefined;
+	
+	var _postsActions = __webpack_require__(268);
+	
+	var _postActions = __webpack_require__(266);
+	
+	var _store = __webpack_require__(259);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var getPost = exports.getPost = function getPost(nextState) {
+	  _store2.default.dispatch((0, _postActions.getSinglePostAsync)(nextState.params.id));
+	};
+	var getAllPosts = exports.getAllPosts = function getAllPosts() {
+	  _store2.default.dispatch((0, _postsActions.getPostsAsync)());
+	};
 
 /***/ }
 /******/ ]);

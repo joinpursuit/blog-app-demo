@@ -13,8 +13,9 @@ import NoRoute from './404/NoRoute';
 
 //Redux
 import store from './store/store.js';
-import {getPostsAsync} from './posts/posts-actions.js';
-import {getSinglePostAsync} from './post/post-actions.js';
+
+//Route utils
+import {getPost, getAllPosts} from './route-utils';
 
 
 const App = (props) => (
@@ -23,9 +24,6 @@ const App = (props) => (
       {props.children}
     </div>
 )
-
-const getPost = (nextState) => {store.dispatch(getSinglePostAsync(nextState.params.id))}
-const getAllPosts = () => {store.dispatch(getPostsAsync())}
 
 ReactDOM.render(
   <Provider store={store}>
